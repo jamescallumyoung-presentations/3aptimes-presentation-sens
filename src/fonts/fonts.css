@@ -1,0 +1,34 @@
+@font-face {
+    font-family: "Beausite Classic Reg";
+    src: url('BeausiteClassicWeb-Regular.woff');
+}
+
+@font-face {
+    font-family: "Beausite Classic Light";
+    src: url('BeausiteClassicWeb-Light.woff2');
+}
+
+.reveal h2, .reveal h3, .reveal h4, .reveal h5, .reveal h6 {
+    font-family: "Beausite Classic Reg", monospace;
+    font-weight: 300;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.07;
+    letter-spacing: normal;
+}
+
+.reveal,
+.reveal h1,
+.reveal p,
+.reveal li {
+    font-family: "Beausite Classic Light", sans-serif;
+    font-weight: 300;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.29;
+    letter-spacing: normal;
+}
+
+.reveal code {
+    font-size: 1rem;
+}
