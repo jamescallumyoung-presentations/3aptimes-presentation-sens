@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-    <title>3apedia 2022 | µFrontends</title>
+    <title>3AP Times Nov 2022 | SENS</title>
 
     <link rel="stylesheet" href="/node_modules/reveal.js/dist/reset.css">
     <link rel="stylesheet" href="/node_modules/reveal.js/dist/reveal.css">
@@ -22,381 +22,191 @@
 
             <!-- Title -->
             <section>
-                <section data-background-image="https://3ap.ch/static/23314ce429cf56dfebf8ff6d8008f16c/06655/bridging_the_gap.jpg">
-                    <h1>Micro Frontends</h1>
-                    <h1>&</h1>
-                    <h1>Axa Pods</h1>
-                </section>
-                <section>
-                    <h2>What we'll look at</h2>
-                    <ul class="list-inside">
-                        <li class="fragment fade-in">Brief intro to Micro frontends</li>
-                        <li class="fragment fade-in">Briefly describe the different styles of μMF</li>
-                        <li class="fragment fade-in">Axa's "Pod" system</li>
-                        <li class="fragment fade-in">How Pods are built and shipped</li>
-                        <li class="fragment fade-in">Axa's "Bifrost" toolchain</li>
-                        <li class="fragment fade-in">AEM: Adobe Experience Manager</li>
-                        <li class="fragment fade-in">Questions, examples, etc.</li>
-                    </ul>
+                <section data-background-image="/src/imgs/3ap-site-heart-hands.jpg">
+                    <h1>SENS</h1>
                 </section>
             </section>
 
-            <!-- Pt 1 -->
-            <section data-background-color="aquamarine">
+            <!-- Pt 1 - 30s -->
+            <section data-background-color="#890c58">
                 <h3>Pt. 1:</h3>
-                <h1>Micro Frontends</h1>
+                <h1>What we made</h1>
             </section>
 
-            <!-- What is a uMF -->
+            <!-- What we made - 30s -->
             <section>
                 <section>
-                    <h3>What is a Micro frontend?</h3>
+                    <h3>What's SENS all about?</h3>
                     <ul class="list-inside">
-                        <li class="fragment fade-in">like a Microservice, but for the UI</li>
-                        <li class="fragment fade-in">break the UI monolith into smaller parts</li>
-                        <li class="fragment fade-in">allows a polyglot architecture</li>
+                        <li class="fragment fade-in">SENS are a recycling foundation in Switzerland.</li>
+                        <li class="fragment fade-in">They wanted a site where consumers could get recycling recommendations.</li>
+                        <li class="fragment fade-in">They also wanted to re-host their existing blog within the site.</li>
                     </ul>
 
                     <aside class="notes">
                         <div class="font-mono">
-                            we're all familiar with micro service arch <br>
-                            break up good: <br>
-                            - project grow = harder to coordinate <br>
-                            - project grow = slower CI/CD/builds <br>
-                            we can mix frameworks in a single project <br>
-                            - important esp now: frameworks/tooling change rapidly <br>
-                            - e.g.: react, angular, vue, svelte, etc. <br>
+                            (max 30 seconds)<br />
+                            3<br />
+                            Describe SENS super briefly...<br />
+                            <br />
+                            Talk about the "project into, and goals"...<br />
                         </div>
                     </aside>
                 </section>
                 <section>
-                    <img data-src="https://www.cygnismedia.com/images/post-images/micro-front-ends-development/what-is-micro-frontends.jpg">
-                    <aside class="notes">
-                        each part has its own CI/CD <br>
-                        foo
-                    </aside>
+                    <img data-src="/src/imgs/sens-screenshot.png">
                 </section>
             </section>
 
-            <!-- Styles of uMF -->
+            <!-- Requirements - 1m -->
             <section>
                 <section>
-                    <h3>Different kinds of Micro Frontend</h3>
-                    <p class="fragment fade-in">Based on how we deliver the μMF:</p>
+                    <h3>Requirements</h3>
                     <ul class="list-inside">
-                        <li class="fragment fade-in">a complete webpage (HTML, CSS, JS...), in an iframe</li>
-                        <li class="fragment fade-in">an in-framework Component (React.FC, for example)</li>
-                        <li class="fragment fade-in">a JS bundle, mounted  to the DOM</li>
+                        <li class="fragment fade-in">A mobile-first website</li>
+                        <li class="fragment fade-in">Low running costs</li>
+                        <li class="fragment fade-in">Multiple Domain Names<br />(english/german spelling, etc.)</li>
+                        <li class="fragment fade-in">Host (some) posts from their existing blog</li>
+                        <li class="fragment fade-in"><b>Usage Analytics</b></li>
                     </ul>
 
                     <aside class="notes">
                         <div class="font-mono">
-                            3ap admin: export a fn that React uses to create a component <br>
-                            break up good: <br>
-                            - project grow = harder to coordinate <br>
-                            - project grow = slower CI/CD/builds <br>
-                            we can mix frameworks in a single project <br>
-                            - important esp now: frameworks/tooling change rapidly <br>
-                            - e.g.: react, angular, vue, svelte, etc. <br>
+                            (max 30 seconds)<br />
+                            5<br />
+                            Quickly mention each thing<br />
+                            (the next slide is about Analytics)<br />
                         </div>
                     </aside>
                 </section>
-                <!-- Export React Component Eg -->
-                <section data-markdown>
-                    <textarea data-template>
-                        #### In-framework Component.
+                <section>
+                    <h3>Why</h3>
+                    <ul class="list-inside">
+                        <li class="fragment fade-in">Critical to SENS' funding</li>
+                    </ul>
+                    <br />
+                    <h3>How</h3>
+                    <ul class="list-inside">
+                        <li class="fragment fade-in">Google Analytics</li>
+                        <li class="fragment fade-in">Google Tag Manager (click tracking)</li>
+                        <li class="fragment fade-in">Hotjar (user heatmaps)</li>
+                    </ul>
 
-                        ```ts [1-11|13-14]
-                        const AdminAppRouter: FC<AdminAppProps> = ({ routes }) => {
-                          const auth = useAuth();
-
-                          return (
-                            <ThemeProvider>
-                              <SnackbarProvider>
-                                <HomePage routes={routes} />
-                              </SnackbarProvider>
-                            </ThemeProvider>
-                          );
-                        };
-
-                        export const AdminApp: FC<AdminAppProps> = ({ routes }) =>
-                          <AdminAppRouter routes={routes} />;
-                        ```
-                    </textarea>
+                    <aside class="notes">
+                        <div class="font-mono">
+                            (max 30 seconds)<br />
+                            Why: 1, How: 3<br />
+                            Discuss why they need the analytics: funding, impact, measurable, etc.<br />
+                        </div>
+                    </aside>
                 </section>
-                <!-- Export Js Bundle Eg -->
-                <section data-markdown>
-                    <textarea data-template>
-                        #### Export JS Bundle
-
-                        ```ts [1-10|12|6,13,28]
-                        export class PodImsContacthub {
-                          public elem: any;
-                          public options: { [x: string]: any; };
-
-                          constructor(elem: any, { store, logout, ...rest }: any) {
-                            this.elem = elem;
-                            this.options = rest;
-
-                            this.init();
-                          }
-
-                          init() {
-                            ReactDOM.render((
-                              <MyAxaTokenContext.Provider value={myAxaTokenContextValue}>
-                                <BifrostStoreContext.Provider
-                                  value={{
-                                    get: this.store.get,
-                                    subscribe: this.store.subscribe,
-                                  }}
-                                >
-                                  <ApiContext.Provider value={apiContextValue}>
-                                    <I18nTranslatedTextContext.Provider value={i18nTranslatedTextContextValue}>
-                                      <ContactHubProfilesTemplate />
-                                    </I18nTranslatedTextContext.Provider>
-                                  </ApiContext.Provider>
-                                </BifrostStoreContext.Provider>
-                              </MyAxaTokenContext.Provider>
-                            ), this.elem);
-                          }
-                        }
-                        ```
-                    </textarea>
+                <section>
+                    <h3>Hotjar heatmaps:</h3>
+                    <img data-src="/src/imgs/hotjar.png">
                 </section>
             </section>
 
-            <!-- Pt 2: Pod -->
-            <section
-                    data-auto-animate
-                    data-background-color="skyblue"
-            >
+            <!-- Pt 2: Architecture & Tech - 2m -->
+            <section data-background-color="#890c58">
                 <h3>Pt. 2:</h3>
-                <h1>Axa: Pod People</h1>
-            </section>
-            <section
-                    data-auto-animate
-                    data-background-color="skyblue"
-            >
-                <h3>Pt. 2:</h3>
-                <h1 style="text-decoration: line-through">Axa: Pod People</h1>
-            </section>
-            <section
-                    data-auto-animate
-                    data-background-color="skyblue"
-            >
-                <h3>Pt. 2:</h3>
-                <h1>The Pod Architecture</h1>
+                <h1>Architecture & Tech</h1>
             </section>
 
-            <!-- The Pod Interface -->
+            <!-- Next - 30s -->
             <section>
-                <h3>The Pod Interface</h3>
-                <div class="fragment fade-in">
-                    <p>Recap the code from before:</p>
-                    <pre>
-                        <code data-trim data-noescape data-line-numbers>
-class SomePod {
-    constructor(
-        public elem: HTMLElement,
-        public options: {
-            store: BifrostStore,
-            language: 'en'|'fr'|'de'|'it',
-            [key: string]: string, // accept other props
-        },
-    ) {}
-}
-                        </code>
-                    </pre>
-                </div>
-                <p class="fragment fade-in">To make the Pod work, we need a common interface</p>
-                <p class="fragment fade-in">introducing...</p>
+                <h3>Next.JS</h3>
+                <ul class="list-inside">
+                    <li class="fragment fade-in">React server</li>
+                    <li class="fragment fade-in">File-based routing</li>
+                    <li class="fragment fade-in">Server Side Rendering</li>
+                    <li class="fragment fade-in">✨Awesome✨</li>
+                </ul>
 
                 <aside class="notes">
-                    In order to understand how Pods work, we have to take a detour to look at the Pod toolchain; Bifrost
+                    <div class="font-mono">
+                        (max 30 seconds but don't rush)<br />
+                        4<br />
+                        Mention Next's awesome features<br />
+                        - routing<br />
+                        - built-in components<br />
+                        - server side rendering<br />
+                        - built in API server<br />
+                    </div>
                 </aside>
             </section>
 
-            <!-- Bifrost -->
+            <!-- Storybook 30s -->
             <section>
-                <section>
-                    <h3>Bifrost</h3>
-                    <ul>
-                        <li class="fragment fade-in">Defines the Pod interface</li>
-                        <li class="fragment fade-in">
-                            Provides auth methods: <br>
-                            &nbsp;&nbsp;&nbsp;iframe / redirect / HTTP API based
-                        </li>
-                        <li class="fragment fade-in">Data Store</li>
-                    </ul>
+                <h3>Storybook</h3>
+                <ul class="list-inside">
+                    <li class="fragment fade-in">Component library</li>
+                    <li class="fragment fade-in">Usable by clients & devs</li>
+                    <li class="fragment fade-in">Able to interact with each component</li>
+                    <li class="fragment fade-in">✨Also awesome✨</li>
+                </ul>
 
-                    <aside class="notes">
-                        In order to understand how Pods work, we have to take a detour to look at the Pod toolchain; Bifrost <br />
-                        Auth is pretty cool; all the useful login flows
-                    </aside>
-                </section>
-                <section>
-                    <h3>Bifrost Store</h3>
-                    <ul>
-                        <li class="fragment fade-in">Immutable</li>
-                        <li class="fragment fade-in">Communicate between Pods</li>
-                        <li class="fragment fade-in">sessionStorage based</li>
-                    </ul>
-
-                    <aside class="notes">
-                        sessionStorage based gives good support <br />
-                        handles the awkward sessionStorage APi <br />
-                        this is an issue we faced in 3AP Admin <br />
-                        <br />
-                        there's another way to share properties with Pods too (podproperties)
-                    </aside>
-                </section>
+                <aside class="notes">
+                    <div class="font-mono">
+                        (max 30 seconds)<br />
+                        4<br />
+                        Mention Storybook's awesome features<br />
+                        - allows devs to test components out<br />
+                        - allows us to show clients progress early<br />
+                        - interactive: see what the components look like<br />
+                        - can be hosted easily and shared with clients with zero tech know-how<br />
+                    </div>
+                </aside>
             </section>
 
-            <!-- Building Pods -->
+            <!-- Magnolia CMS 30s -->
             <section>
-                <section>
-                    <h3>Building Pods</h3>
-                    <p class="fragment fade-in">Prod builds:</p>
-                    <ul>
-                        <li class="fragment fade-in">Delivered as an ESM module</li>
-                        <li class="fragment fade-in">Built with rollup</li>
-                    </ul>
-                    <p class="fragment fade-in">Dev builds:</p>
-                    <ul>
-                        <li class="fragment fade-in">Delivered as a webpack bundle</li>
-                        <li class="fragment fade-in">Built with Webpack</li>
-                    </ul>
+                <h3>Magnolia CMS</h3>
+                <ul class="list-inside">
+                    <li class="fragment fade-in">Already in use by the client</li>
+                    <li class="fragment fade-in">Weird API</li>
+                    <li class="fragment fade-in">👎Not awesome👎</li>
+                    <li class="fragment fade-in">But we made it work... 🚀</li>
+                </ul>
 
-                    <aside class="notes">
-                        this is one of the hardest parts of working with Axa Pods<br />
-                        keeping versions up-to-date is difficult<br />
-                        N.B.: <= node version 14<br />
-                    </aside>
-                </section>
-                <section>
-                    <img data-src="/src/imgs/build-bifrost-1.png" />
-                </section>
+                <aside class="notes">
+                    <div class="font-mono">
+                        (max 30 seconds)<br />
+                        4<br />
+                        Mention the issues we had with Magnolia<br />
+                        - poor API format<br />
+                        - clunky<br />
+                        - had to rely on client to manage permissions<br />
+                    </div>
+                </aside>
             </section>
 
-            <!-- Adobe Experience Manager -->
+            <!-- Analytics - 30s -->
             <section>
-                <section>
-                    <h3>Adobe Experience Manager (AEM)</h3>
-                    <ul>
-                        <li class="fragment fade-in">"Web experience composer"</li>
-                        <li class="fragment fade-in">Can layout generic HTML elements</li>
-                        <li class="fragment fade-in">Can also layout pre-made HTML elements</li>
-                    </ul>
+                <h3>Google Analytics + Tag manager</h3>
+                <ul class="list-inside">
+                    <li class="fragment fade-in">Integration was easy at first...</li>
+                    <li class="fragment fade-in">...but made harder by cookie handling.</li>
+                    <li class="fragment fade-in"><b>Learning: use an off-the-shelf cookie banner.</b></li>
+                </ul>
 
-                    <aside class="notes">
-                        this is one of the hardest parts of working with Axa Pods<br />
-                        keeping versions up-to-date is difficult<br />
-                        N.B.: <= node version 14<br />
-                    </aside>
-                </section>
-                <section>
-                    <img data-src="/src/imgs/aes-screenshot.png" />
-                </section>
-                <section data-markdown>
-                    <textarea data-template>
-                        #### Pod Mounting Point.
-
-                        ```html [2|4-8]
-                        <body>
-                          <article class="o-pod-podname js-podname-mount podname" />
-
-                          <script>
-                            document.addEventListener('DOMContentLoaded', function () {
-                              var elem = document.querySelector('.js-podimscontacthub-mount');
-                              var instance = new PodImsContacthub(elem, { ...elem.dataset, store: window.store });
-                            });
-                          </script>
-                        </body>
-                        ```
-                    </textarea>
-                </section>
+                <aside class="notes">
+                    <div class="font-mono">
+                        (max 30 seconds)<br />
+                        3<br />
+                        Mention your thoughts on Google Analytics...
+                    </div>
+                </aside>
             </section>
 
-            <!-- Podproperties -->
-            <section>
-                <!-- podproperties intro -->
-                <section>
-                    <h3>Configuring Pods with AES</h3>
-                    <h4>Pod Properties</h4>
-                    <ul>
-                        <li class="fragment fade-in">podproperties.json file</li>
-                        <li class="fragment fade-in">Bifrost toolchain injects properties into HTML</li>
-                        <li class="fragment fade-in">HTML props passed to Pod in options param</li>
-                        <li class="fragment fade-in">Has some "magic" functionality...</li>
-                    </ul>
-
-                    <aside class="notes">
-                        The podproperties.json file can have any shape;<br />
-                        - warn: untyped by default
-                    </aside>
-                </section>
-                <section data-markdown>
-                    <textarea data-template>
-                        #### Example podproperties.json file.
-
-                        ```json
-                        {
-                          "type": "auth",
-                          "foo": {
-                            "bar": "100"
-                          },
-                          "arrays": [
-                            "are",
-                            "allowed",
-                            "too",
-                          ],
-                          "api_url": {
-                            "dev": "https://dev.api.example.com",
-                            "acc": "https://test.api.example.com",
-                            "prod": "https://api.example.com"
-                          }
-                        ```
-                    </textarea>
-                </section>
-
-                <!-- podproperties magic -->
-                <section>
-                    <h3>"Magic" Podproperties fields</h3>
-                    <ul>
-                        <li class="fragment fade-in">Bifrost pre-processes these fields</li>
-                        <li class="fragment fade-in">Based on object structure</li>
-                    </ul>
-                </section>
-                <section data-markdown>
-                    <textarea data-template>
-                        #### "Magic" Podproperties fields:
-
-                        ```jsonc
-                        {
-                          "api_url": {
-                            "dev": "https://dev.api.example.com",
-                            "acc": "https://test.api.example.com",
-                            "prod": "https://api.example.com"
-                          }
-                          // => string
-                        }
-                        ```
-                    </textarea>
-                </section>
-                <section>
-                    <img data-src="/src/imgs/aes-screenshot.png" />
-                </section>
-            </section>
-
-            <!-- Pt 3: Q&A -->
-            <section data-background-color="#f06292">
+            <!-- Pt 3 - 4 mins -->
+            <section data-background-color="#890c58">
                 <h3>Pt. 3:</h3>
-                <h1>Questions?</h1>
+                <h1>Demo Time</h1>
             </section>
 
-            <!-- Pt 3: Q&A -->
-            <section data-background-color="#ffe082">
-                <h3>👋</h3>
+            <section>
+                <h3>https://circular-plattform.ch/</h3>
+                <img src="/src/imgs/qr-code.png">
             </section>
 
 

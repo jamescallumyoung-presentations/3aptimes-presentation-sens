@@ -29,6 +29,11 @@
     letter-spacing: normal;
 }
 
+b {
+    font-family: "Beausite Classic Reg", sans-serif;
+    font-weight: bold;
+}
+
 .reveal code {
     font-size: 1rem;
 }
